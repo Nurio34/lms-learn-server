@@ -94,7 +94,6 @@ const login = async (req, res) => {
             ip: req.headers["x-forwarded-for"] || req.connection.remoteAddress,
         },
         JWT_SECRET,
-        { expiresIn: "1h" },
     );
 
     return res.status(201).json({
