@@ -21,7 +21,10 @@ const CLIENT_URL = process.env.CLIENT_URL;
 //! --- CORS CONFIGURATION  ---
 app.use(
     cors({
-        origin: CLIENT_URL,
+        origin: [
+            "https://lms-learn.vercel.app", // Production frontend
+            "http://localhost:5173", // Development frontend
+        ],
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
     }),
