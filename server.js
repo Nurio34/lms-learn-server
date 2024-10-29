@@ -19,17 +19,20 @@ const CLIENT_URL = process.env.CLIENT_URL;
 //! ---------------------------
 
 //! --- CORS CONFIGURATION  ---
-app.use(
-    cors({
-        origin: [
-            "https://lms-learn-e5636q81d-nurio34s-projects.vercel.app/",
-            "https://lms-learn.vercel.app", // Production frontend
-            "http://localhost:5173", // Development frontend
-        ],
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-    }),
-); //! ---------------------------
+// app.use(
+//     cors({
+//         origin: [
+//             "https://lms-learn-e5636q81d-nurio34s-projects.vercel.app/",
+//             "https://lms-learn.vercel.app", // Production frontend
+//             "http://localhost:5173", // Development frontend
+//         ],
+//         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+//         allowedHeaders: ["Content-Type", "Authorization"],
+//     }),
+// );
+//! ---------------------------
+
+app.use(cors());
 
 //! --- MONGODB CONNECTION  ---
 mongoose

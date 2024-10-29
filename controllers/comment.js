@@ -110,7 +110,6 @@ const sendReply = async (req, res) => {
         repliedStudentName,
         mainCommentId,
     } = req.body;
-    console.log({ mainCommentId });
 
     try {
         //! *** CREATE COMMENT ***
@@ -341,7 +340,6 @@ const editComment = async (req, res) => {
     const { id } = jwt.verify(token, JWT_SECRET);
 
     const { commentId, lectureId, comment } = req.body;
-    console.log({ commentId, lectureId, comment });
 
     try {
         //! *** EDIT COMMENT ***
@@ -358,8 +356,6 @@ const editComment = async (req, res) => {
                     "An error ocured while sending comment ! Try again ...",
             });
         }
-
-        console.log({ EditedComment });
 
         //! *************************
 

@@ -224,8 +224,6 @@ const updatePlayingLecture = async (req, res) => {
     const studentId = id;
     const { courseId, index } = req.params;
 
-    console.log({ studentId, courseId, index });
-
     try {
         const UpdatedProgress = await CourseProgress.findOneAndUpdate(
             { studentId, courseId },
