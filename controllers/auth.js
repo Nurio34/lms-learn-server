@@ -92,6 +92,7 @@ const login = async (req, res) => {
             role: user.role,
             lastLoginDate: lastLoginDate,
             ip: req.headers["x-forwarded-for"] || req.connection.remoteAddress,
+            image: user.image,
         },
         JWT_SECRET,
     );
@@ -141,4 +142,44 @@ const getUserInfo = async (req, res) => {
     }
 };
 
-module.exports = { signup, login, getUserInfo };
+const addProfilePicture = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized action !",
+        });
+    }
+
+    const token = authHeader.split(" ")[1];
+    const { id } = jwt.verify(token, JWT_SECRET);
+    const image = req.body;
+
+    try {
+        const UpdatedUser = await User.findByIdAndUpdate(
+            id,
+            { $set: { image } },
+            { new: true, runValidators: true },
+        );
+        if (!UpdatedUser) {
+            return res.status(404).json({
+                success: false,
+                message: "An error occured while updating profile picture !",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Profile picture updated successfullu ...",
+            user: UpdatedUser,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Unexpected error while updating profile picture !",
+        });
+    }
+};
+
+module.exports = { signup, login, getUserInfo, addProfilePicture };

@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { signup, login, getUserInfo } = require("../controllers/auth");
+const {
+    signup,
+    login,
+    getUserInfo,
+    addProfilePicture,
+} = require("../controllers/auth");
 const authMiddleware = require("../middlewares/auth");
 
 router.post("/signup", signup);
@@ -15,5 +20,6 @@ router.get("/check-auth", authMiddleware, (req, res) => {
     });
 });
 router.get("/get-user-info/:userId", getUserInfo);
+router.patch("/profile-picture", addProfilePicture);
 
 module.exports = router;
