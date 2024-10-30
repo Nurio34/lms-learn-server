@@ -46,10 +46,12 @@ const addCourse = async (req, res) => {
 const getCourses = async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
+
         if (!authHeader) {
             return res.status(401).json({
                 status: false,
                 message: "Unauthorized action while getCourses",
+                authHeader,
             });
         }
 
@@ -63,6 +65,8 @@ const getCourses = async (req, res) => {
             return res.status(403).json({
                 status: false,
                 message: "Invalid or expired token",
+                token,
+                id,
             });
         }
 
@@ -79,6 +83,7 @@ const getCourses = async (req, res) => {
         return res.status(500).json({
             status: false,
             message: "Unexpected error while getCourses",
+            error,
         });
     }
 };
