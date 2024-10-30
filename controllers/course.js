@@ -46,25 +46,28 @@ const addCourse = async (req, res) => {
 const getCourses = async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
-
         if (!authHeader) {
-            return res.status(404).json({
+            return res.status(401).json({
                 status: false,
                 message: "Unauthorized action while getCourses",
             });
         }
 
         const token = authHeader.split(" ")[1];
-        const { id } = jwt.verify(token, JWT_SECRET);
 
-        const courses = await Course.find({ instructerId: id });
-
-        if (courses.length === 0) {
-            return res.status(404).json({
+        // Verify JWT and handle invalid tokens
+        let id;
+        try {
+            ({ id } = jwt.verify(token, JWT_SECRET));
+        } catch (err) {
+            return res.status(403).json({
                 status: false,
-                message: "You don't have any courses yet !",
+                message: "Invalid or expired token",
             });
         }
+
+        // Fetch courses for the instructor
+        const courses = await Course.find({ instructerId: id });
 
         return res.status(200).json({
             status: true,
@@ -72,6 +75,7 @@ const getCourses = async (req, res) => {
             courses,
         });
     } catch (error) {
+        console.error("Error in getCourses:", error); // Helps in debugging server-side issues
         return res.status(500).json({
             status: false,
             message: "Unexpected error while getCourses",
