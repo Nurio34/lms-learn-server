@@ -2,7 +2,7 @@ const Course = require("../models/course");
 const StudentCourses = require("../models/studentCourses");
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = process.env.JWT_Secret;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const addCourse = async (req, res) => {
     const form = req.body;
