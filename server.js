@@ -16,21 +16,19 @@ app.use(express.json());
 //! --- VARIABLES  ---
 const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
-const CLIENT_URL = process.env.CLIENT_URL;
 //! ---------------------------
 
 //! --- CORS CONFIGURATION  ---
-// app.use(
-//     cors({
-//         origin: [
-//             "https://lms-learn-e5636q81d-nurio34s-projects.vercel.app/",
-//             "https://lms-learn.vercel.app", // Production frontend
-//             "http://localhost:5173", // Development frontend
-//         ],
-//         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-//         allowedHeaders: ["Content-Type", "Authorization"],
-//     }),
-// );
+app.use(
+  cors({
+    origin: [
+      "https://lms-learn.vercel.app", // Production frontend
+      "http://localhost:5173", // Development frontend
+    ],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 //! ---------------------------
 
 app.use(cors());
