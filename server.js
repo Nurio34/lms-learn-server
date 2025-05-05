@@ -36,9 +36,9 @@ app.use(cors());
 
 //! --- MONGODB CONNECTION  ---
 mongoose
-    .connect(MONGO_URI)
-    .then(() => console.log("Database connected successfully"))
-    .catch((e) => console.log(e));
+  .connect(MONGO_URI)
+  .then(() => console.log("Database connected successfully"))
+  .catch((e) => console.log(e));
 //! ---------------------------
 
 //! --- ROUTER ---
@@ -52,14 +52,14 @@ app.use("/comment", CommentRouter);
 
 //! --- GLOBAL ERROR HANDLER  ---
 app.use((err, req, res, next) => {
-    console.log(err.stack);
-    res.status(500).json({
-        success: false,
-        message: "Something went wrong ( from GLOBAL ERROR HANDLER)",
-    });
+  console.log(err.stack);
+  res.status(500).json({
+    success: false,
+    message: "Something went wrong ( from GLOBAL ERROR HANDLER)",
+  });
 });
 //! -----------------------------
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
