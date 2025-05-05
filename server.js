@@ -8,6 +8,7 @@ const CourseRouter = require("./routes/course");
 const PaymentRouter = require("./routes/payment");
 const MyCoursesRouter = require("./routes/my-courses");
 const CommentRouter = require("./routes/comment");
+const PingRouter = require("./routes/ping");
 
 const app = express();
 app.use(express.json());
@@ -48,6 +49,7 @@ app.use("/course", CourseRouter);
 app.use("/payment", PaymentRouter);
 app.use("/my-courses", MyCoursesRouter);
 app.use("/comment", CommentRouter);
+app.use("/ping", PingRouter);
 //! --------------
 
 //! --- GLOBAL ERROR HANDLER  ---
