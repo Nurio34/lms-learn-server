@@ -7,7 +7,6 @@ const upload = multer({ dest: "uploads/" });
 
 router.post("/upload", upload.single("file"), async (req, res) => {
   try {
-    console.log(req.file);
     const response = await uploadVideo(req.file.path);
 
     return res.status(201).json({
